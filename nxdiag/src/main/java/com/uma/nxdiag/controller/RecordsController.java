@@ -3,6 +3,7 @@ package com.uma.nxdiag.controller;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,12 @@ import com.uma.nxdiag.model.Record;
 @RestController
 public class RecordsController {
 	
+	@Autowired
+	private DPIService dpiService;
+	
 	@GetMapping("/records/all")
 	public List<DPIRecord> getAll(){
-		return DPIService.getAll();		
+		return dpiService.getrecords();
 	}
 	
 //	@GetMapping("/clients")

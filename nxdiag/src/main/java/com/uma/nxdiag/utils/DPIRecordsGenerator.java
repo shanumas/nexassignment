@@ -8,7 +8,7 @@ import java.util.List;
 import com.uma.nxdiag.model.DPIRecord;
 import com.uma.nxdiag.model.Record;
 
-public class DPICalculator {
+public class DPIRecordsGenerator {
 
 	private List<Record> allRecords;
 	private static BigDecimal min_bsod_count = BigDecimal.ZERO;
@@ -26,9 +26,7 @@ public class DPICalculator {
 	private static BigDecimal min_system_free_space = BigDecimal.ZERO;
 	private static BigDecimal max_system_free_space = BigDecimal.ZERO;
 
-	private static DPICalculator calcInstance = null;
-
-	public DPICalculator(List<Record> records) {
+	public DPIRecordsGenerator(List<Record> records) {
 		this.allRecords = records;
 		for (Record record : records) {
 
@@ -216,10 +214,10 @@ public class DPICalculator {
 	BigDecimal getNormalizedValue(BigDecimal currentValue, BigDecimal minValue, BigDecimal maxValue) {
 		BigDecimal divisor = maxValue.subtract(minValue);
 		if (!BigDecimal.ZERO.equals(divisor)) {
-			System.out.println("one:" + currentValue.subtract(minValue));
-			System.out.println("two:" + (currentValue.subtract(minValue)).divide(divisor, 4, RoundingMode.DOWN));
-			System.out.println("three:"
-					+ BigDecimal.ZERO.max((currentValue.subtract(minValue)).divide(divisor, 4, RoundingMode.DOWN)));
+//			System.out.println("one:" + currentValue.subtract(minValue));
+//			System.out.println("two:" + (currentValue.subtract(minValue)).divide(divisor, 4, RoundingMode.DOWN));
+//			System.out.println("three:"
+//					+ BigDecimal.ZERO.max((currentValue.subtract(minValue)).divide(divisor, 4, RoundingMode.DOWN)));
 			// Set precision to 3 decimals for division
 			return BigDecimal.ONE
 					.min(BigDecimal.ZERO.max((currentValue.subtract(minValue)).divide(divisor, 4, RoundingMode.DOWN)));

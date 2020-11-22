@@ -12,28 +12,29 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
 
 import com.uma.nxdiag.model.DPIRecord;
 import com.uma.nxdiag.model.Record;
-import com.uma.nxdiag.utils.DPICalculator;
+import com.uma.nxdiag.utils.DPIRecordsGenerator;
 import com.uma.nxdiag.utils.RecordUtil;
 
+@Service
 public class DPIService {
 	
 	//This may be cached if needed
-	private static List<Record> cachedList = null;
+	private static List<DPIRecord> dpiRecords = null;
 	
-	public static List<DPIRecord> getAll(){
-		DPICalculator calculator = new DPICalculator(getRaw());
-		return calculator.getDPIList();		
+	static {
+		DPIRecordsGenerator calculator = new DPIRecordsGenerator(getRaw());
+		dpiRecords = calculator.getDPIList();
+	}
+	
+	public static List<DPIRecord> getrecords() {
+		return dpiRecords;
 	}
 
 	private static List<Record> getRaw() {
-		
-		if(cachedList!=null)
-		{
-			return cachedList;
-		}
 		
 		List<Record> records = new ArrayList<Record>();
 
@@ -80,7 +81,6 @@ public class DPIService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		cachedList = records;
 		return records;
 
 	}
