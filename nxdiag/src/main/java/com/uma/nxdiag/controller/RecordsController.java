@@ -22,11 +22,6 @@ public class RecordsController {
 		return dpiService.getrecords();
 	}
 
-//	@GetMapping("/clients")
-//	public Set<Integer> getClients(){
-//		return RecordUtil.getClientsList(DPIService.getAll());
-//	}
-
 	// Sample http://localhost:8080/records/all
 	@GetMapping("/records/client/{id}")
 	public List<DPIRecord> getClientRecords(@PathVariable int id) {
