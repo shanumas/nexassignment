@@ -14,7 +14,7 @@ import com.uma.nxdiag.model.DPIRecord;
 import com.uma.nxdiag.services.DPIService;
 
 @RestController
-public class RecordsController implements WebMvcConfigurer{
+public class RecordsController implements WebMvcConfigurer {
 
 	@Autowired
 	private DPIService dpiService;
@@ -22,6 +22,24 @@ public class RecordsController implements WebMvcConfigurer{
 	@GetMapping("/records/all")
 	public List<DPIRecord> getAll() {
 		return DPIService.getrecords();
+	}
+
+	// Sample http://localhost:8080/clients
+	@GetMapping("/clients")
+	public List<Integer> getAllClients() {
+		return DPIService.getrecords().stream().map(record -> record.getClient_id()).distinct().collect(Collectors.toList());
+	}
+
+	// Sample http://localhost:8080/offices
+	@GetMapping("/offices")
+	public List<Integer> getAllOffices() {
+		return DPIService.getrecords().stream().map(record -> record.getOffice_id()).distinct().collect(Collectors.toList());
+	}
+
+	// Sample http://localhost:8080/devices
+	@GetMapping("/devices")
+	public List<Long> getAllDevices() {
+		return DPIService.getrecords().stream().map(record -> record.getDevice_id()).distinct().collect(Collectors.toList());
 	}
 
 	// Sample http://localhost:8080/records/all
@@ -65,10 +83,10 @@ public class RecordsController implements WebMvcConfigurer{
 		return DPIService.getrecords().stream().filter(record -> record.getDpi().doubleValue() > value)
 				.collect(Collectors.toList());
 	}
-	
+
 	@Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedMethods("*");
-    }
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedMethods("*");
+	}
 
 }

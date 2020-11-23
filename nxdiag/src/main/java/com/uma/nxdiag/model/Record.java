@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class Record implements Serializable {
 	
-	private long device_id;
+	private int device_id;
 	private int client_id;
 	private int office_id;
 	private BigDecimal bsod_count;
@@ -16,7 +16,7 @@ public class Record implements Serializable {
 	private BigDecimal memory_usage;
 	private BigDecimal system_free_space;
 
-	public Record(long device_id, int client_id, int office_id, BigDecimal bsod_count, BigDecimal hard_reset_count, BigDecimal boot_speed,
+	public Record(int device_id, int client_id, int office_id, BigDecimal bsod_count, BigDecimal hard_reset_count, BigDecimal boot_speed,
 			BigDecimal logon_duration, BigDecimal cpu_usage, BigDecimal memory_usage, BigDecimal system_free_space) {
 		this.device_id = device_id;
 		this.client_id = client_id;
@@ -31,11 +31,11 @@ public class Record implements Serializable {
 	}
 
 	
-	public long getDevice_id() {
+	public int getDevice_id() {
 		return device_id;
 	}
 
-	public void setDevice_id(long device_id) {
+	public void setDevice_id(int device_id) {
 		this.device_id = device_id;
 	}
 
