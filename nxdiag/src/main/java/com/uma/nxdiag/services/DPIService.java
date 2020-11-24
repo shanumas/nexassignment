@@ -26,8 +26,8 @@ public class DPIService {
 	private static List<DPIRecord> dpiRecords = null;
 	
 	static {
-		DPIRecordsGenerator calculator = new DPIRecordsGenerator(getRaw());
-		dpiRecords = calculator.getDPIList();
+		DPIRecordsGenerator dpiGenerator = new DPIRecordsGenerator(getRaw());
+		dpiRecords = dpiGenerator.getDPIList();
 	}
 	
 	public static List<DPIRecord> getrecords() {
